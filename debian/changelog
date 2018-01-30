@@ -1,3 +1,18 @@
+logentries (1.4.42) wheezy jessie lucid precise quantal saucy trusty; urgency=low
+
+  [ Viliam Holub ]
+  * Fixing error reporting
+  * Adding support for structure patterns
+  * Polishing code
+  * Improve readability and fix comment typo
+
+  [ Emma Louise Lynch ]
+  * Docker (#206)
+
+  [ Logentries Team ]
+
+ -- Logentries Team <hello@logentries.com>  Tue, 30 Jan 2018 16:45:44 +0000
+
 logentries (1.4.41) wheezy jessie lucid precise quantal saucy trusty; urgency=low
 
   [ Stephen Hynes ]
