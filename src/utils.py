@@ -390,7 +390,7 @@ def find_api_obj_by_key(obj_list, key):
 
 
 def die(cause, exit_code=EXIT_ERR):
-    log.critical('%s', cause)
+    log.critical('\n%s', cause)
     sys.exit(exit_code)
 
 
