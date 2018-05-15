@@ -3332,7 +3332,7 @@ def is_log_fs(addr):
     return False
 
 
-def cmd_ls_ips(ags):
+def cmd_ls_ips():
     """
     List IPs used by the agent.
     """
@@ -3351,7 +3351,7 @@ def cmd_ls(args):
     General list command
     """
     if len(args) == 1 and args[0] == 'ips':
-        cmd_ls_ips(args)
+        cmd_ls_ips()
         return
     if len(args) == 0:
         args = ['/']
