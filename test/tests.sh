@@ -19,8 +19,9 @@ trap finish EXIT
 export AUTO_TEST='yes'
 
 declare -A TEMPLATES
-[ -f /etc/debian_version ] && TEMPLATES[DEBIAN_VERSION]="$(cat /etc/debian_version)"
-[ -f /etc/debian_version ] && TEMPLATES[DEBIAN_VERSION_ENC]="${TEMPLATES[DEBIAN_VERSION]/\//%2F}"
+TEMPLATES[DEBIAN_VERSION]="$(lsb_release -sr)"
+TEMPLATES[DEBIAN_VERSION_ENC]="${TEMPLATES[DEBIAN_VERSION]/\//%2F}"
+TEMPLATES[DIST_NAME]="$(lsb_release -si)"
 
 # Run tests one by one
 for A in ${TESTS[*]} ; do
