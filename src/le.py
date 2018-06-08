@@ -2326,11 +2326,11 @@ def get_response(operation, addr, data=None, headers={}, silent=False, die_on_er
         if not silent:
             log.debug("Network error: %s", msg)
     except httplib.BadStatusLine:
-        error = "Internal error, bad status line"
+        err = "Internal error, bad status line"
         if die_on_error:
-            die(error)
+            die(err)
         else:
-            log.info(error)
+            log.info(err)
 
     return None, None
 
@@ -2356,11 +2356,11 @@ def api_request(request, required=False, check_status=False, silent=False, die_o
             return None
         elif response.status == 504:
             if retry > 1:
-                red("Cannot process LE request: (%s) -- Retrying...", response.status)
+                print red("Cannot process LE request: (504) -- Retrying...")
                 retry -= 1
                 time.sleep(2)
             else:
-                die("Failed to process LE request after 5 retries")
+                error("Failed to process LE request after 5 retries")
         elif response.status != 200:
             if required:
                 error("Cannot process LE request: (%s)", response.status)
