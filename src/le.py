@@ -2340,27 +2340,40 @@ def api_request(request, required=False, check_status=False, silent=False, die_o
     Processes a request on the logentries domain.
     """
     # Obtain response
-    response, conn = get_response(
-        "POST", LE_SERVER_API, urllib.urlencode(request),
-        silent=silent, die_on_error=die_on_error, domain=Domain.API,
-        headers={'Content-Type': 'application/x-www-form-urlencoded'})
+    retry = 5
+    while retry > 0:
+        response, conn = get_response(
+            "POST", LE_SERVER_API, urllib.urlencode(request),
+            silent=silent, die_on_error=die_on_error, domain=Domain.API,
+            headers={'Content-Type': 'application/x-www-form-urlencoded'})
 
-    # Check the response
-    if not response:
-        if required:
-            error("Cannot process LE request, no response")
+        # Check the response
+        if not response:
+            if required:
+                error("Cannot process LE request, no response")
+            if conn:
+                conn.close()
+            return None
+        elif response.status == 504:
+            if retry > 1:
+                red("Cannot process LE request: (%s) -- Retrying...", response.status)
+                retry -= 1
+                time.sleep(2)
+            else:
+                die("Failed to process LE request after 5 retries")
+        elif response.status != 200:
+            if required:
+                error("Cannot process LE request: (%s)", response.status)
+            conn.close()
+            return None
+        else:
+            retry = -1
+            xresponse = response.read()
+            log.debug('Domain response: "%s"', xresponse)
+
         if conn:
             conn.close()
-        return None
-    if response.status != 200:
-        if required:
-            error("Cannot process LE request: (%s)", response.status)
-        conn.close()
-        return None
 
-    xresponse = response.read()
-    conn.close()
-    log.debug('Domain response: "%s"', xresponse)
     try:
         d_response = json_loads(xresponse)
     except ValueError:
