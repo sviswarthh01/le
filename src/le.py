@@ -2340,8 +2340,8 @@ def api_request(request, required=False, check_status=False, silent=False, die_o
     Processes a request on the logentries domain.
     """
     # Obtain response
-    retry = 5
-    while retry > 0:
+    retries = 5
+    while retries > 0:
         response, conn = get_response(
             "POST", LE_SERVER_API, urllib.urlencode(request),
             silent=silent, die_on_error=die_on_error, domain=Domain.API,
@@ -2355,9 +2355,9 @@ def api_request(request, required=False, check_status=False, silent=False, die_o
                 conn.close()
             return None
         elif response.status == 504:
-            if retry > 1:
+            if retries > 1:
                 print red("Cannot process LE request: (504) -- Retrying...")
-                retry -= 1
+                retries -= 1
                 time.sleep(2)
             else:
                 error("Failed to process LE request after 5 retries")
@@ -2367,7 +2367,7 @@ def api_request(request, required=False, check_status=False, silent=False, die_o
             conn.close()
             return None
         else:
-            retry = -1
+            retries = -1
             xresponse = response.read()
             log.debug('Domain response: "%s"', xresponse)
 
