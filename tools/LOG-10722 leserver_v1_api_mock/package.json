@@ -1,0 +1,13 @@
+{
+  "name": "log-10722-leserver_v1_api_mock",
+  "version": "1.0.0",
+  "description": "Mock to test that API requests are retried after HTTP 504 response",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Robin Jacobs <robin_jacobs@rapid7.com>",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

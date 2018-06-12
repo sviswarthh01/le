@@ -24,7 +24,8 @@ __all__ = ["EXIT_OK", "EXIT_NO", "EXIT_HELP", "EXIT_ERR", "EXIT_TERMINATED",
            "ServerHTTPSConnection", "LOG_LE_AGENT", "create_conf_dir",
            "default_cert_file", "system_cert_file", "domain_connect",
            "no_more_args", "find_hosts", "find_logs", "find_api_obj_by_key", "find_api_obj_by_name",
-           "die", "error", "colored", "rfile", 'TCP_TIMEOUT', "rm_pidfile", "uuid_parse", "report"]
+           "die", "error", "colored", "red", "rfile", 'TCP_TIMEOUT', "rm_pidfile", "uuid_parse",
+           "report"]
 
 # Return codes
 EXIT_OK = 0
