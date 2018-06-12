@@ -1,3 +1,24 @@
+logentries (1.4.43) wheezy jessie lucid precise quantal saucy trusty; urgency=low
+
+  [ Gerald Curran ]
+  * Update README.md
+
+  [ Robin Jacobs ]
+  * LOG-11043 Removed structures
+  * LOG-11043 Fix distro/version check
+  * LOG-11043 Fixed multilog_pathname_verification tests
+  * LOG-11043 Removed unused argument from cmd_ls_ips
+  * LOG-10722 Retry on 504
+  * LOG-10722 Retry on 504
+  * LOG-10722 retry -> retries
+  * LOG-10722 Added a mock to test retries with, added request information to log messages
+  * LOG-10722 Ignore case in UUID regex
+  * LOG-10722 Fixed UUID regex
+
+  [ Logentries Team ]
+
+ -- Logentries Team <hello@logentries.com>  Tue, 12 Jun 2018 13:17:03 +0000
+
 logentries (1.4.42) wheezy jessie lucid precise quantal saucy trusty; urgency=low
 
   [ Viliam Holub ]
