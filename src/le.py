@@ -2304,7 +2304,7 @@ config = Config()
 
 
 def do_request(conn, operation, addr, data=None, headers={}):
-    log.debug('Domain request: %s %s %s %s', operation, addr, sanitise_log_output(data), headers)
+    log.debug('Domain request: %s %s %s %s', operation, sanitise_log_output(addr), sanitise_log_output(data), headers)
     if data:
         conn.request(operation, addr, data, headers=headers)
     else:
@@ -2321,7 +2321,7 @@ def get_response(operation, addr, data=None, headers={}, silent=False, die_on_er
         conn = domain_connect(config, domain, Domain)
         do_request(conn, operation, addr, data, headers)
         response = conn.getresponse()
-        log.debug('Request %s returned status %s' % (sanitise_log_output(data), response.status))
+        log.debug('Request %s %s returned status %s' % (sanitise_log_output(addr), sanitise_log_output(data), response.status))
         return response, conn
     except socket.sslerror, msg:  # Network error
         if not silent:
