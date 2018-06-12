@@ -290,6 +290,10 @@ import formats
 import metrics
 import socks
 
+# Strip user key from log output
+UUID_REGEX = re.compile(r'([a-f0-9]{8}-([a-f0-9]{4}-){3}-[a-f0-9]{12})')
+USER_KEY_SUB = '<USER_KEY>'
+
 # Option to avoid issues around encodings
 #reload(sys)
 #sys.setdefaultencoding('utf8')
@@ -2301,7 +2305,7 @@ config = Config()
 
 
 def do_request(conn, operation, addr, data=None, headers={}):
-    log.debug('Domain request: %s %s %s %s', operation, addr, data, headers)
+    log.debug('Domain request: %s %s %s %s', operation, addr, sanitise_log_output(data), headers)
     if data:
         conn.request(operation, addr, data, headers=headers)
     else:
@@ -2318,6 +2322,7 @@ def get_response(operation, addr, data=None, headers={}, silent=False, die_on_er
         conn = domain_connect(config, domain, Domain)
         do_request(conn, operation, addr, data, headers)
         response = conn.getresponse()
+        log.debug('Request %s returned status %s' % (sanitise_log_output(data), response.status))
         return response, conn
     except socket.sslerror, msg:  # Network error
         if not silent:
@@ -2334,6 +2339,11 @@ def get_response(operation, addr, data=None, headers={}, silent=False, die_on_er
 
     return None, None
 
+def sanitise_log_output(obj):
+    obj = str(obj)
+    if (config.user_key):
+        obj = obj.replace(config.user_key, USER_KEY_SUB)
+    return UUID_REGEX.sub(USER_KEY_SUB, obj)
 
 def api_request(request, required=False, check_status=False, silent=False, die_on_error=True):
     """
@@ -2350,20 +2360,20 @@ def api_request(request, required=False, check_status=False, silent=False, die_o
         # Check the response
         if not response:
             if required:
-                error("Cannot process LE request, no response")
+                error("Cannot process LE request, no response (%s)" % sanitise_log_output(request))
             if conn:
                 conn.close()
             return None
         elif response.status == 504:
             if retries > 1:
-                print red("Cannot process LE request: (504) -- Retrying...")
+                print red("Cannot process LE request, got HTTP 504 -- Retrying... (%s)" % sanitise_log_output(request))
                 retries -= 1
                 time.sleep(2)
             else:
-                error("Failed to process LE request after 5 retries")
+                error("Failed to process LE request after 5 retries (%s)" % sanitise_log_output(request))
         elif response.status != 200:
             if required:
-                error("Cannot process LE request: (%s)", response.status)
+                error("Cannot process LE request, got HTTP %s (%s)" % (response.status, sanitise_log_output(request)))
             conn.close()
             return None
         else:
@@ -2377,11 +2387,11 @@ def api_request(request, required=False, check_status=False, silent=False, die_o
     try:
         d_response = json_loads(xresponse)
     except ValueError:
-        error = 'Error: Invalid response, parse error.'
+        err = 'Error: Invalid response, parse error.'
         if die_on_error:
-            die(error)
+            die(err)
         else:
-            log.info(error)
+            log.info(err)
             d_response = None
 
     if check_status and d_response['response'] != 'ok':
@@ -2390,11 +2400,11 @@ def api_request(request, required=False, check_status=False, silent=False, die_o
         # Special compatibility case: change group to host
         reason = reason.replace( 'The group with ID', 'The host with ID')
 
-        error = "Error: %s" % reason
+        err = "Error: %s" % reason
         if die_on_error:
-            die(error)
+            die(err)
         else:
-            log.info(error)
+            log.info(err)
             d_response = None
 
     return d_response
@@ -2413,11 +2423,11 @@ def pull_request(what, params):
 
     # Check the response
     if not response:
-        error("Cannot process LE request, no response")
+        error("Cannot process LE request, no response (%s)" % sanitise_log_output(addr))
     if response.status == 404:
         error("Log not found")
     if response.status != 200:
-        error("Cannot process LE request: (%s)", response.status)
+        error("Cannot process LE request, got HTTP %s (%s)" % (sanitise_log_output(addr), response.status))
 
     while True:
         data = response.read(65536)
@@ -2442,7 +2452,7 @@ def request(request, required=False, check_status=False, rtype='GET', retry=Fals
         if response:
             break
         if required:
-            error('Cannot process LE request, no response')
+            error('Cannot process LE request, no response (%s)' % sanitise_log_output(request))
         if retry:
             if not noticed:
                 log.info('Error: No response from LE, re-trying in %ss intervals',
