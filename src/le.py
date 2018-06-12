@@ -291,7 +291,7 @@ import metrics
 import socks
 
 # Strip user key from log output
-UUID_REGEX = re.compile(r'([a-f0-9]{8}-([a-f0-9]{4}-){3}-[a-f0-9]{12})')
+UUID_REGEX = re.compile(r'([a-f0-9]{8})-([a-f0-9]{4}-){3}-[a-f0-9]{12}', re.IGNORECASE)
 USER_KEY_SUB = '<USER_KEY>'
 
 # Option to avoid issues around encodings
@@ -2340,10 +2340,7 @@ def get_response(operation, addr, data=None, headers={}, silent=False, die_on_er
     return None, None
 
 def sanitise_log_output(obj):
-    obj = str(obj)
-    if (config.user_key):
-        obj = obj.replace(config.user_key, USER_KEY_SUB)
-    return UUID_REGEX.sub(USER_KEY_SUB, obj)
+    return UUID_REGEX.sub(r'\1', str(obj))
 
 def api_request(request, required=False, check_status=False, silent=False, die_on_error=True):
     """
