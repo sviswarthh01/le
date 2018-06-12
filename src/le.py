@@ -291,8 +291,7 @@ import metrics
 import socks
 
 # Strip user key from log output
-UUID_REGEX = re.compile(r'([a-f0-9]{8})-([a-f0-9]{4}-){3}-[a-f0-9]{12}', re.IGNORECASE)
-USER_KEY_SUB = '<USER_KEY>'
+UUID_REGEX = re.compile(r'([a-f0-9]{8})-([a-f0-9]{4}-){3}[a-f0-9]{12}', re.IGNORECASE)
 
 # Option to avoid issues around encodings
 #reload(sys)
@@ -2363,7 +2362,7 @@ def api_request(request, required=False, check_status=False, silent=False, die_o
             return None
         elif response.status == 504:
             if retries > 1:
-                print red("Cannot process LE request, got HTTP 504 -- Retrying... (%s)" % sanitise_log_output(request))
+                log.warning("Cannot process LE request, got HTTP 504 -- Retrying... (%s)" % sanitise_log_output(request))
                 retries -= 1
                 time.sleep(2)
             else:
