@@ -101,7 +101,8 @@ Testcase 'Follow file across directories as new ones created; stop following whe
 $LE --debug-events --debug-multilog monitor &
 #e Configuration files loaded: sandbox_config
 #e Connecting to 127.0.0.1:8081
-#e Domain request: GET /f720fe54-879a-11e4-81ac-277d856f873e/hosts/9df0ea6f-36fa-820f-a6bc-c97da8939a06/ None {}
+#e Domain request: GET /f720fe54/hosts/9df0ea6f/ '' {}
+#e Request /f720fe54/hosts/9df0ea6f/ '' returned status 200
 #e List response: {"object": "loglist", "list": [{"name": "Apache", "key": "484d6e95-a4e1-42fe-820f-5a4c0824428c", "created": 1418711930412, "retention": -1, "follow": "true", "object": "log", "type": "agent", "filename": "Multilog:$TMP/apache*/current"}], "response": "ok"}
 #e Following $TMP/apache*/current
 #e Opening connection 127.0.0.1:8081 PUT /f720fe54-879a-11e4-81ac-277d856f873e/hosts/9df0ea6f-36fa-820f-a6bc-c97da8939a06/484d6e95-a4e1-42fe-820f-5a4c0824428c/?realtime=1 HTTP/1.0

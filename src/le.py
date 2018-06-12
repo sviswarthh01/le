@@ -2340,7 +2340,7 @@ def get_response(operation, addr, data=None, headers={}, silent=False, die_on_er
 
 def sanitise_log_output(obj):
     if not obj:
-        return ''
+        return "''"
     return UUID_REGEX.sub(r'\1', str(obj))
 
 def api_request(request, required=False, check_status=False, silent=False, die_on_error=True):

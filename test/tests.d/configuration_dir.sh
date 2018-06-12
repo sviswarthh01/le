@@ -21,7 +21,8 @@ $LE ls
 #o logs
 #o logtypes
 #e Connecting to 127.0.0.1:8081
-#e Domain request: GET /f720fe54-879a-11e4-81ac-277d856f873e/ None {}
+#e Domain request: GET /f720fe54/ '' {}
+#e Request /f720fe54/ '' returned status 200
 #e List response: {"object": "rootlist", "list": [{"name": "logs", "key": ""}, {"name": "hosts", "key": ""}, {"name": "hostnames", "key": ""}, {"name": "apps", "key": ""}, {"name": "clusters", "key": ""}, {"name": "logtypes", "key": ""}], "response": "ok"}
 #e 6 items
 
@@ -45,7 +46,8 @@ $LE ls
 #o logs
 #o logtypes
 #e Connecting to 127.0.0.1:8081
-#e Domain request: GET /f720fe54-879a-11e4-81ac-277d856f873e/ None {}
+#e Domain request: GET /f720fe54/ '' {}
+#e Request /f720fe54/ '' returned status 200
 #e List response: {"object": "rootlist", "list": [{"name": "logs", "key": ""}, {"name": "hosts", "key": ""}, {"name": "hostnames", "key": ""}, {"name": "apps", "key": ""}, {"name": "clusters", "key": ""}, {"name": "logtypes", "key": ""}], "response": "ok"}
 #e 6 items
 

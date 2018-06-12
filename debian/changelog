@@ -9,11 +9,8 @@ logentries (1.4.43) wheezy jessie lucid precise quantal saucy trusty; urgency=lo
   * LOG-11043 Fixed multilog_pathname_verification tests
   * LOG-11043 Removed unused argument from cmd_ls_ips
   * LOG-10722 Retry on 504
-  * LOG-10722 Retry on 504
-  * LOG-10722 retry -> retries
-  * LOG-10722 Added a mock to test retries with, added request information to log messages
-  * LOG-10722 Ignore case in UUID regex
-  * LOG-10722 Fixed UUID regex
+  * LOG-10722 Add extra information on request failure
+  * LOG-10722 Sanitise log output
 
   [ Logentries Team ]
 

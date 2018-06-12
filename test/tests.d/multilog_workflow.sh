@@ -22,7 +22,8 @@ Testcase 'Use --multilog parameter with pathname with no wildcard'
 $LE follow --debug-multilog "$TMP/apache-01/current" --multilog
 #e Configuration files loaded: sandbox_config
 #e Connecting to 127.0.0.1:8081
-#e Domain request: POST / host_key=9df0ea6f-36fa-820f-a6bc-c97da8939a06&name=current&user_key=f720fe54-879a-11e4-81ac-277d856f873e&request=new_log&filename=Multilog%3A%2Ftmp%2F$SUBDIR%2Fapache-01%2Fcurrent&follow=true&type= {'Content-Type': 'application/x-www-form-urlencoded'}
+#e Domain request: POST / host_key=9df0ea6f&name=current&user_key=f720fe54&request=new_log&filename=Multilog%3A%2Ftmp%2F$SUBDIR%2Fapache-01%2Fcurrent&follow=true&type= {'Content-Type': 'application/x-www-form-urlencoded'}
+#e Request / host_key=9df0ea6f&name=current&user_key=f720fe54&request=new_log&filename=Multilog%3A%2Ftmp%2F$SUBDIR%2Fapache-01%2Fcurrent&follow=true&type= returned status 200
 #e Domain response: "{"log": {"name": "current", "key": "32fa313c-4c70-4214-9bb6-3ff9c6549a22", "created": 1418711930412, "retention": -1, "follow": "true", "object": "log", "type": "agent", "filename": "Multilog:$TMP/apache-01/current"}, "worker": "a0", "response": "ok", "log_key": "32fa313c-4c70-4214-9bb6-3ff9c6549a22"}"
 #o Will follow Multilog:$TMP/apache-01/current as current
 #e Don't forget to restart the daemon
@@ -33,7 +34,8 @@ Testcase 'Use --multilog parameter with wildcard in a directory name in pathname
 $LE follow --debug-multilog "$TMP/apache*/current" --multilog
 #e Configuration files loaded: sandbox_config
 #e Connecting to 127.0.0.1:8081
-#e Domain request: POST / host_key=9df0ea6f-36fa-820f-a6bc-c97da8939a06&name=current&user_key=f720fe54-879a-11e4-81ac-277d856f873e&request=new_log&filename=Multilog%3A%2Ftmp%2F$SUBDIR%2Fapache%2A%2Fcurrent&follow=true&type= {'Content-Type': 'application/x-www-form-urlencoded'}
+#e Domain request: POST / host_key=9df0ea6f&name=current&user_key=f720fe54&request=new_log&filename=Multilog%3A%2Ftmp%2F$SUBDIR%2Fapache%2A%2Fcurrent&follow=true&type= {'Content-Type': 'application/x-www-form-urlencoded'}
+#e Request / host_key=9df0ea6f&name=current&user_key=f720fe54&request=new_log&filename=Multilog%3A%2Ftmp%2F$SUBDIR%2Fapache%2A%2Fcurrent&follow=true&type= returned status 200
 #e Domain response: "{"log": {"name": "current", "key": "32fa313c-4c70-4214-9bb6-3ff9c6549a22", "created": 1418711930412, "retention": -1, "follow": "true", "object": "log", "type": "agent", "filename": "Multilog:$TMP/apache*/current"}, "worker": "a0", "response": "ok", "log_key": "32fa313c-4c70-4214-9bb6-3ff9c6549a22"}"
 #o Will follow Multilog:$TMP/apache*/current as current
 #e Don't forget to restart the daemon
@@ -44,7 +46,8 @@ Testcase 'Use the --name= option to specify log name when setting up files to fo
 $LE follow --debug-multilog "$TMP/apache-*/current" --multilog --name=ApacheWeb
 #e Configuration files loaded: sandbox_config
 #e Connecting to 127.0.0.1:8081
-#e Domain request: POST / host_key=9df0ea6f-36fa-820f-a6bc-c97da8939a06&name=ApacheWeb&user_key=f720fe54-879a-11e4-81ac-277d856f873e&request=new_log&filename=Multilog%3A%2Ftmp%2F$SUBDIR%2Fapache-%2A%2Fcurrent&follow=true&type= {'Content-Type': 'application/x-www-form-urlencoded'}
+#e Domain request: POST / host_key=9df0ea6f&name=ApacheWeb&user_key=f720fe54&request=new_log&filename=Multilog%3A%2Ftmp%2F$SUBDIR%2Fapache-%2A%2Fcurrent&follow=true&type= {'Content-Type': 'application/x-www-form-urlencoded'}
+#e Request / host_key=9df0ea6f&name=ApacheWeb&user_key=f720fe54&request=new_log&filename=Multilog%3A%2Ftmp%2F$SUBDIR%2Fapache-%2A%2Fcurrent&follow=true&type= returned status 200
 #e Domain response: "{"log": {"name": "ApacheWeb", "key": "32fa313c-4c70-4214-9bb6-3ff9c6549a22", "created": 1418711930412, "retention": -1, "follow": "true", "object": "log", "type": "agent", "filename": "Multilog:$TMP/apache-*/current"}, "worker": "a0", "response": "ok", "log_key": "32fa313c-4c70-4214-9bb6-3ff9c6549a22"}"
 #o Will follow Multilog:$TMP/apache-*/current as ApacheWeb
 #e Don't forget to restart the daemon
@@ -70,7 +73,8 @@ touch apache-03/current
 $LE --debug-events monitor &
 #e Configuration files loaded: sandbox_config
 #e Connecting to 127.0.0.1:8081
-#e Domain request: GET /f720fe54-879a-11e4-81ac-277d856f873e/hosts/9df0ea6f-36fa-820f-a6bc-c97da8939a06/ None {}
+#e Domain request: GET /f720fe54/hosts/9df0ea6f/ '' {}
+#e Request /f720fe54/hosts/9df0ea6f/ '' returned status 200
 #e List response: {"object": "loglist", "list": [{"name": "Apache", "key": "484d6e95-a4e1-42fe-820f-5a4c0824428c", "created": 1418711930412, "retention": -1, "follow": "true", "object": "log", "type": "agent", "filename": "Multilog:$TMP/apache*/current"}], "response": "ok"}
 #e Following $TMP/apache*/current
 #e Opening connection 127.0.0.1:8081 PUT /f720fe54-879a-11e4-81ac-277d856f873e/hosts/9df0ea6f-36fa-820f-a6bc-c97da8939a06/484d6e95-a4e1-42fe-820f-5a4c0824428c/?realtime=1 HTTP/1.0
