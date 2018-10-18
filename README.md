@@ -103,7 +103,9 @@ For rpm-based systems RH, CentOS, Fedora, add this in `/etc/yum.repos.d/logentri
 	gpgkey=https://rep.logentries.com/RPM-GPG-KEY-logentries
 
 Replace `XXX` with the name of your system; eg., one of `fedora21`, `rh5`,
-`rh6`, `amazonlatest`, `centos5`, `centos6`, or `centos7`.
+`rh6`, `amazonlatest`, `centos5`, `centos6`, or `centos7`. Other distributions
+and versions may be supported as well; if your distribution isn't listed here,
+be sure to check [rep.logentries.com](https://rep.logentries.com).
 
 Then run `yum update` and `yum install logentries`. If you want to run the agent
 as daemon, install it via `yum install logentries-daemon`.
