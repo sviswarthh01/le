@@ -99,8 +99,8 @@ For rpm-based systems RH, CentOS, Fedora, add this in `/etc/yum.repos.d/logentri
 	name=Logentries repo
 	enabled=1
 	metadata_expire=1d
-	baseurl=http://rep.logentries.com/XXX/\$basearch
-	gpgkey=http://rep.logentries.com/RPM-GPG-KEY-logentries
+	baseurl=https://rep.logentries.com/XXX/\$basearch
+	gpgkey=https://rep.logentries.com/RPM-GPG-KEY-logentries
 
 Replace `XXX` with the name of your system, i.e. one of fedora18, fedora19,
 fedora20, fedora21, rh5, rh6, amazonlatest, centos5, centos6. Then run `yum
