@@ -179,7 +179,9 @@ EOL
 elif [ -f /etc/debian_version ]; then
 
 	CODENAME=xenial
-
+	
+	cd /; sudo mkdir tmp; cd /tmp; touch logentries_debug
+	
 	if [ "$CODENAME" == "UNKNOWN" ]; then
 		printf "Unknown distribution, please contact support@logentries.com\n"
 		exit 1
