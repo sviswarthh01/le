@@ -178,24 +178,7 @@ EOL
 
 elif [ -f /etc/debian_version ]; then
 
-	if hash lsb-release 2>/dev/null; then
-		CODENAME=$(lsb-release -c | sed 's/Codename://' | tr -d '[:space:]')
-	else
-		release=$(cat /etc/debian_version)
-		IFS='.' read -a array <<< "$release"
-
-		case "${array[0]}" in
-		# Debian
-		7) CODENAME="wheezy"
-		   ;;
-		6) CODENAME="squeeze"
-		   ;;
-		5) CODENAME="lenny"
-		   ;;
-		*) CODENAME="UNKNOWN"
-		   ;;
-		esac
-	fi
+	CODENAME=xenial
 
 	if [ "$CODENAME" == "UNKNOWN" ]; then
 		printf "Unknown distribution, please contact support@logentries.com\n"
