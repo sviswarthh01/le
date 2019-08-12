@@ -33,7 +33,7 @@ DEBIAN_REPO_CONF="/etc/apt/sources.list.d/logentries.list"
 DEBIAN_UPDATE="apt-get update"
 DEBIAN_AGENT_INSTALL="apt-get install logentries -qq -y --allow-unauthenticated"
 DEBIAN_PROCTITLE_INSTALL="apt-get install python-setproctitle -qq -y --allow-unauthenticated"
-DEBIAN_DAEMON_INSTALL="apt-get install logentries-daemon -qq -y"
+DEBIAN_DAEMON_INSTALL="apt-get install logentries-daemon -qq -y --allow-unauthenticated"
 DEBIAN_CURL_INSTALL="apt-get install curl -y"
 
 REDHAT_REPO_CONF="/etc/yum.repos.d/logentries.repo"
