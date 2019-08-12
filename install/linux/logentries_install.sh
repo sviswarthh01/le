@@ -178,7 +178,7 @@ EOL
 
 elif [ -f /etc/debian_version ]; then
 
-	if hash lsb_release 2>/dev/null; then
+	if hash lsb-release 2>/dev/null; then
 		CODENAME=$(lsb-release -c | sed 's/Codename://' | tr -d '[:space:]')
 	else
 		release=$(cat /etc/debian_version)
